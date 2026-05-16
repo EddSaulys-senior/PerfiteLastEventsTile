@@ -161,6 +161,7 @@ end;
 | `DateFormat` | Date/time display format. Default: `dd.mm.yyyy hh:nn`. |
 | `EmptyText` | Text displayed when the event collection is empty. |
 | `MaxEvents` | Maximum number of visible events. Default: `6`. |
+| `EventTextStyle` | Font style for event text only, for example `[]`, `[fsBold]`, `[fsItalic]`. |
 
 ### Appearance
 
@@ -174,6 +175,7 @@ end;
 | `UnknownImageIndex` | Image index for unknown events. |
 | `TransparentBackground` | Does not draw tile background when enabled. |
 | `Selected` | Draws selected background color when enabled. |
+| `ShowRowSeparators` | Shows horizontal row separators and the full-width separator below the title. Default: `True`. |
 
 ### Colors
 
@@ -185,6 +187,7 @@ end;
 | `TextColor` | Main text color when `UseSkinColors = False`. |
 | `SecondaryTextColor` | Date/checkpoint color when `UseSkinColors = False`. |
 | `SeparatorColor` | Timeline separator color when `UseSkinColors = False`. |
+| `RowSeparatorColor` | Horizontal row separator color when `UseSkinColors = False`. |
 | `BorderColor` | Tile border color when `UseSkinColors = False`. |
 
 ## Recommended settings
@@ -197,10 +200,13 @@ NormalColor = clWhite
 TextColor = clWindowText
 SecondaryTextColor = clGrayText
 SeparatorColor = $00E6E6E6
+RowSeparatorColor = $00EEEEEE
 BorderColor = $00DADADA
 IconSize = 10
 MaxEvents = 6
 ShowCheckpoint = True
+ShowRowSeparators = True
+EventTextStyle = []
 ```
 
 Dark appearance:
@@ -211,6 +217,7 @@ NormalColor = $002D2D30
 TextColor = clWhite
 SecondaryTextColor = $00B0B0B0
 SeparatorColor = $004A4A4A
+RowSeparatorColor = $003A3A3A
 BorderColor = $00555555
 IconSize = 10
 ```
@@ -256,10 +263,12 @@ SelectedColor = $00FFE8D6
 TextColor = $00402A1F
 SecondaryTextColor = $00908078
 SeparatorColor = $00F0D8C8
+RowSeparatorColor = $00E8D8D0
 BorderColor = $00E4C7B5
 IconSize = 10
 MaxEvents = 6
 Title = Access Events
+ShowRowSeparators = True
 ```
 
 ### Dark
@@ -273,10 +282,12 @@ SelectedColor = $00404040
 TextColor = clWhite
 SecondaryTextColor = $00B0B0B0
 SeparatorColor = $004A4A4A
+RowSeparatorColor = $003A3A3A
 BorderColor = $00555555
 IconSize = 10
 MaxEvents = 6
 Title = Last Events
+ShowRowSeparators = True
 ```
 
 ### Dark Green
@@ -290,10 +301,12 @@ SelectedColor = $002A563C
 TextColor = $00F5F5F5
 SecondaryTextColor = $00C0D0C8
 SeparatorColor = $003E6B50
+RowSeparatorColor = $002A503B
 BorderColor = $006BAA80
 IconSize = 10
 MaxEvents = 6
 Title = Checkpoints
+ShowRowSeparators = True
 ```
 
 ### Dark Purple
@@ -307,10 +320,12 @@ SelectedColor = $004A3A58
 TextColor = $00F5F5F5
 SecondaryTextColor = $00CDC0D8
 SeparatorColor = $005A4B68
+RowSeparatorColor = $00453852
 BorderColor = $008D6CAF
 IconSize = 10
 MaxEvents = 6
 Title = PerfiteLastEventsTile
+ShowRowSeparators = True
 ```
 
 ### Glossy Black
@@ -324,10 +339,12 @@ SelectedColor = $00282724
 TextColor = $00F5F5F5
 SecondaryTextColor = $00C8C8C8
 SeparatorColor = $00363636
+RowSeparatorColor = $002A2A2A
 BorderColor = $00606060
 IconSize = 10
 MaxEvents = 6
 Title = PerfiteLastEventsTile
+ShowRowSeparators = True
 ```
 
 ### Applying a preset in code
@@ -341,9 +358,12 @@ begin
   ATile.TextColor := clWhite;
   ATile.SecondaryTextColor := $00B0B0B0;
   ATile.SeparatorColor := $004A4A4A;
+  ATile.RowSeparatorColor := $003A3A3A;
   ATile.BorderColor := $00555555;
   ATile.IconSize := 10;
   ATile.MaxEvents := 6;
+  ATile.ShowRowSeparators := True;
+  ATile.EventTextStyle := [];
   ATile.Title := 'Last Events';
 end;
 ```
@@ -362,4 +382,6 @@ When this mode is enabled, manual color properties are ignored for the tile text
 
 - The component is intentionally rendered as a static dashboard tile.
 - It does not implement row selection, scrolling, or hover highlighting.
+- When `ShowRowSeparators` is enabled, the tile draws horizontal row separators and a full-width separator below the title.
+- `EventTextStyle` affects only the main event text. Date and checkpoint text keep the regular font style.
 - For SVG images use a DevExpress `TcxImageList` and assign its indices to the event kind image index properties.

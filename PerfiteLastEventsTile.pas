@@ -84,6 +84,7 @@ type
     FMaxEvents: Integer;
     FDateFormat: string;
     FEmptyText: string;
+    FEventTextStyle: TFontStyles;
     procedure SetEvents(const Value: TPerfiteEventCollection);
     procedure SetShowCheckpoint(const Value: Boolean);
     procedure SetTransparentBackground(const Value: Boolean);
@@ -107,6 +108,7 @@ type
     procedure SetMaxEvents(const Value: Integer);
     procedure SetDateFormat(const Value: string);
     procedure SetEmptyText(const Value: string);
+    procedure SetEventTextStyle(const Value: TFontStyles);
     function ActualBackColor: TColor;
     function ActualTextColor: TColor;
     function ActualSecondaryTextColor: TColor;
@@ -150,6 +152,7 @@ type
     property MaxEvents: Integer read FMaxEvents write SetMaxEvents default 6;
     property DateFormat: string read FDateFormat write SetDateFormat;
     property EmptyText: string read FEmptyText write SetEmptyText;
+    property EventTextStyle: TFontStyles read FEventTextStyle write SetEventTextStyle;
     property Events: TPerfiteEventCollection read FEvents write SetEvents;
     property ShowCheckpoint: Boolean read FShowCheckpoint write SetShowCheckpoint default True;
     property TransparentBackground: Boolean read FTransparentBackground write SetTransparentBackground default False;
@@ -289,6 +292,7 @@ begin
   FMaxEvents := MaxVisibleEvents;
   FDateFormat := DefaultDateFormat;
   FEmptyText := DefaultEmptyText;
+  FEventTextStyle := [];
   ControlStyle := ControlStyle + [csOpaque, csReplicatable];
   ParentFont := True;
 end;
@@ -534,6 +538,15 @@ begin
   end;
 end;
 
+procedure TPerfiteLastEventsTile.SetEventTextStyle(const Value: TFontStyles);
+begin
+  if FEventTextStyle <> Value then
+  begin
+    FEventTextStyle := Value;
+    Invalidate;
+  end;
+end;
+
 function TPerfiteLastEventsTile.ActualBackColor: TColor;
 begin
   if not FUseSkinColors then
@@ -735,6 +748,11 @@ begin
   LCanvas.Font.Color := LTextColor;
   LCanvas.Brush.Style := bsClear;
   DrawCanvasText(LCanvas, FTitle, Rect(LContent.Left, LContent.Top, LContent.Right, LContent.Top + LHeaderHeight), DT_LEFT or DT_VCENTER or DT_SINGLELINE or DT_END_ELLIPSIS);
+  LCanvas.Pen.Color := ActualRowSeparatorColor;
+  LCanvas.Pen.Width := Max(1, ScaleValue(1));
+  LCanvas.MoveTo(LContent.Left, LContent.Top + LHeaderHeight);
+  LCanvas.LineTo(LContent.Right, LContent.Top + LHeaderHeight);
+  LCanvas.Pen.Width := 1;
 
   LCanvas.Font.Style := [];
   LCanvas.Font.Size := Font.Size;
@@ -775,8 +793,10 @@ begin
     LTextRect := Rect(LTextLeft, LRowRect.Top, LRowRect.Right - LRightWidth - ScaleValue(8), LRowRect.Bottom);
     LDateRect := Rect(LRowRect.Right - LRightWidth, LRowRect.Top + ScaleValue(2), LRowRect.Right, LRowRect.Top + LRowHeight div 2);
     LCheckpointRect := Rect(LRowRect.Right - LRightWidth, LRowRect.Top + LRowHeight div 2, LRowRect.Right, LRowRect.Bottom - ScaleValue(2));
+    LCanvas.Font.Style := FEventTextStyle;
     LCanvas.Font.Color := LTextColor;
     DrawCanvasText(LCanvas, LItem.Text, LTextRect, DT_LEFT or DT_VCENTER or DT_SINGLELINE or DT_END_ELLIPSIS);
+    LCanvas.Font.Style := [];
     if LItem.EventDateTime > 0 then
       LDateText := FormatDateTime(FDateFormat, LItem.EventDateTime)
     else
