@@ -79,6 +79,8 @@ type
     FSecondaryTextColor: TColor;
     FSeparatorColor: TColor;
     FBorderColor: TColor;
+    FRowSeparatorColor: TColor;
+    FShowRowSeparators: Boolean;
     FMaxEvents: Integer;
     FDateFormat: string;
     FEmptyText: string;
@@ -100,6 +102,8 @@ type
     procedure SetSecondaryTextColor(const Value: TColor);
     procedure SetSeparatorColor(const Value: TColor);
     procedure SetBorderColor(const Value: TColor);
+    procedure SetRowSeparatorColor(const Value: TColor);
+    procedure SetShowRowSeparators(const Value: Boolean);
     procedure SetMaxEvents(const Value: Integer);
     procedure SetDateFormat(const Value: string);
     procedure SetEmptyText(const Value: string);
@@ -107,6 +111,7 @@ type
     function ActualTextColor: TColor;
     function ActualSecondaryTextColor: TColor;
     function ActualSeparatorColor: TColor;
+    function ActualRowSeparatorColor: TColor;
     function ActualBorderColor: TColor;
     function GetAuthor: string;
     function GetImageIndex(AKind: TPerfiteEventKind): Integer;
@@ -139,6 +144,8 @@ type
     property TextColor: TColor read FTextColor write SetTextColor default clWindowText;
     property SecondaryTextColor: TColor read FSecondaryTextColor write SetSecondaryTextColor default clGrayText;
     property SeparatorColor: TColor read FSeparatorColor write SetSeparatorColor default $00E6E6E6;
+    property RowSeparatorColor: TColor read FRowSeparatorColor write SetRowSeparatorColor default $00EEEEEE;
+    property ShowRowSeparators: Boolean read FShowRowSeparators write SetShowRowSeparators default True;
     property BorderColor: TColor read FBorderColor write SetBorderColor default clBtnShadow;
     property MaxEvents: Integer read FMaxEvents write SetMaxEvents default 6;
     property DateFormat: string read FDateFormat write SetDateFormat;
@@ -277,6 +284,8 @@ begin
   FSecondaryTextColor := clGrayText;
   FSeparatorColor := $00E6E6E6;
   FBorderColor := clBtnShadow;
+  FRowSeparatorColor := $00EEEEEE;
+  FShowRowSeparators := True;
   FMaxEvents := MaxVisibleEvents;
   FDateFormat := DefaultDateFormat;
   FEmptyText := DefaultEmptyText;
@@ -477,6 +486,24 @@ begin
   end;
 end;
 
+procedure TPerfiteLastEventsTile.SetRowSeparatorColor(const Value: TColor);
+begin
+  if FRowSeparatorColor <> Value then
+  begin
+    FRowSeparatorColor := Value;
+    Invalidate;
+  end;
+end;
+
+procedure TPerfiteLastEventsTile.SetShowRowSeparators(const Value: Boolean);
+begin
+  if FShowRowSeparators <> Value then
+  begin
+    FShowRowSeparators := Value;
+    Invalidate;
+  end;
+end;
+
 procedure TPerfiteLastEventsTile.SetMaxEvents(const Value: Integer);
 var
   LValue: Integer;
@@ -547,6 +574,14 @@ begin
     Result := StyleServices.GetSystemColor(clBtnFace)
   else
     Result := FSeparatorColor;
+end;
+
+function TPerfiteLastEventsTile.ActualRowSeparatorColor: TColor;
+begin
+  if FUseSkinColors and StyleServices.Enabled then
+    Result := StyleServices.GetSystemColor(clBtnFace)
+  else
+    Result := FRowSeparatorColor;
 end;
 
 function TPerfiteLastEventsTile.ActualBorderColor: TColor;
@@ -719,6 +754,14 @@ begin
   begin
     LItem := FEvents[I];
     LRowRect := Rect(LContent.Left, LContent.Top + LHeaderHeight + I * LRowHeight, LContent.Right, LContent.Top + LHeaderHeight + (I + 1) * LRowHeight);
+    if FShowRowSeparators then
+    begin
+      LCanvas.Pen.Color := ActualRowSeparatorColor;
+      LCanvas.Pen.Width := Max(1, ScaleValue(1));
+      LCanvas.MoveTo(LTextLeft, LRowRect.Top);
+      LCanvas.LineTo(LContent.Right, LRowRect.Top);
+      LCanvas.Pen.Width := 1;
+    end;
     if I < LCount - 1 then
     begin
       LCanvas.Pen.Color := ActualSeparatorColor;

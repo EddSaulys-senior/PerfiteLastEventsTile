@@ -6,6 +6,8 @@ The component is designed for **Delphi 11 Alexandria** and **DevExpress VCL 23.1
 
 ![PerfiteLastEventsTile demo skins](docs/demo-skins.png)
 
+Demo presets: Light, Light Blue, Dark, Dark Green, Dark Purple and Glossy Black.
+
 ## Features
 
 - VCL visual component inherited from `TcxCustomControl`
@@ -217,7 +219,16 @@ IconSize = 10
 
 These presets can be used as starting points when `UseSkinColors = False`.
 
-### Clean Light
+The preview image above demonstrates six visual presets:
+
+- Light
+- Light Blue
+- Dark
+- Dark Green
+- Dark Purple
+- Glossy Black
+
+### Light
 
 Minimal light dashboard style.
 
@@ -234,7 +245,7 @@ MaxEvents = 6
 Title = Last Events
 ```
 
-### Soft Blue
+### Light Blue
 
 Light style with a cool blue accent.
 
@@ -251,7 +262,7 @@ MaxEvents = 6
 Title = Access Events
 ```
 
-### Graphite Dark
+### Dark
 
 Dark dashboard style.
 
@@ -268,38 +279,55 @@ MaxEvents = 6
 Title = Last Events
 ```
 
-### Midnight Blue
+### Dark Green
 
-Dark blue control-room style.
+Dark green monitoring style.
 
 ```text
 UseSkinColors = False
-NormalColor = $0031261C
-SelectedColor = $00504030
+NormalColor = $00193424
+SelectedColor = $002A563C
 TextColor = $00F5F5F5
-SecondaryTextColor = $00C8B8A8
-SeparatorColor = $005C4738
-BorderColor = $00624E40
+SecondaryTextColor = $00C0D0C8
+SeparatorColor = $003E6B50
+BorderColor = $006BAA80
 IconSize = 10
 MaxEvents = 6
 Title = Checkpoints
 ```
 
-### Compact
+### Dark Purple
 
-Useful for narrow dashboard tiles.
+Dark purple dashboard style.
 
 ```text
 UseSkinColors = False
-NormalColor = clWhite
-SelectedColor = $00F7F7F7
-TextColor = $00282828
-SecondaryTextColor = $00757575
-SeparatorColor = $00EAEAEA
-BorderColor = $00E0E0E0
-IconSize = 8
-MaxEvents = 4
-Title = Events
+NormalColor = $00322926
+SelectedColor = $004A3A58
+TextColor = $00F5F5F5
+SecondaryTextColor = $00CDC0D8
+SeparatorColor = $005A4B68
+BorderColor = $008D6CAF
+IconSize = 10
+MaxEvents = 6
+Title = PerfiteLastEventsTile
+```
+
+### Glossy Black
+
+High-contrast glossy black style.
+
+```text
+UseSkinColors = False
+NormalColor = $00171614
+SelectedColor = $00282724
+TextColor = $00F5F5F5
+SecondaryTextColor = $00C8C8C8
+SeparatorColor = $00363636
+BorderColor = $00606060
+IconSize = 10
+MaxEvents = 6
+Title = PerfiteLastEventsTile
 ```
 
 ### Applying a preset in code
