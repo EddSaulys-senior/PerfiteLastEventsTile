@@ -108,6 +108,7 @@ type
     function ActualSecondaryTextColor: TColor;
     function ActualSeparatorColor: TColor;
     function ActualBorderColor: TColor;
+    function GetAuthor: string;
     function GetImageIndex(AKind: TPerfiteEventKind): Integer;
     function ScaleValue(Value: Integer): Integer;
     procedure DrawBackground(ACanvas: TCanvas; const R: TRect);
@@ -131,6 +132,7 @@ type
     property ShowHint;
     property Font;
     property ParentFont;
+    property Author: string read GetAuthor stored False;
     property Title: string read FTitle write SetTitle;
     property IconSize: Integer read FIconSize write SetIconSize default 10;
     property UseSkinColors: Boolean read FUseSkinColors write SetUseSkinColors default True;
@@ -165,6 +167,7 @@ const
   DefaultIconSize = 10;
   DefaultDateFormat = 'dd.mm.yyyy hh:nn';
   DefaultEmptyText = 'No events';
+  ComponentAuthor = 'Perfite | LisEd (c) 2026';
 
 procedure DrawCanvasText(ACanvas: TCanvas; const AText: string; const ARect: TRect; AFlags: Cardinal);
 var
@@ -552,6 +555,11 @@ begin
     Result := StyleServices.GetSystemColor(clBtnShadow)
   else
     Result := FBorderColor;
+end;
+
+function TPerfiteLastEventsTile.GetAuthor: string;
+begin
+  Result := ComponentAuthor;
 end;
 
 function TPerfiteLastEventsTile.GetImageIndex(AKind: TPerfiteEventKind): Integer;

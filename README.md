@@ -4,6 +4,8 @@
 
 The component is designed for **Delphi 11 Alexandria** and **DevExpress VCL 23.1.4**.
 
+![PerfiteLastEventsTile demo skins](docs/demo-skins.png)
+
 ## Features
 
 - VCL visual component inherited from `TcxCustomControl`

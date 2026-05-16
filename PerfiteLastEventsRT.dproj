@@ -68,6 +68,30 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Android64)'!=''">
+        <Cfg_2_Android64>true</Cfg_2_Android64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice64)'!=''">
+        <Cfg_2_iOSDevice64>true</Cfg_2_iOSDevice64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX64' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX64)'!=''">
+        <Cfg_2_OSX64>true</Cfg_2_OSX64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSXARM64' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSXARM64)'!=''">
+        <Cfg_2_OSXARM64>true</Cfg_2_OSXARM64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_E>false</DCC_E>
         <DCC_F>false</DCC_F>
@@ -134,10 +158,28 @@
         <DCC_RangeChecking>true</DCC_RangeChecking>
         <DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Android64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSDevice64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSX64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSXARM64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="vcl.dcp"/>
+        <DCCReference Include="dxCoreRS28.dcp"/>
+        <DCCReference Include="dxGDIPlusRS28.dcp"/>
+        <DCCReference Include="cxLibraryRS28.dcp"/>
+        <DCCReference Include="PerfiteLastEventsTile.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
