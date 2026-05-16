@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{105AC98F-A391-4FFE-9C95-97FDD5F13316}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="PerfiteLastEventsDT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PerfiteLastEventsRT.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PerfiteLastEventsDT">
+        <MSBuild Projects="PerfiteLastEventsDT.dproj"/>
+    </Target>
+    <Target Name="PerfiteLastEventsDT:Clean">
+        <MSBuild Projects="PerfiteLastEventsDT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PerfiteLastEventsDT:Make">
+        <MSBuild Projects="PerfiteLastEventsDT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PerfiteLastEventsRT">
+        <MSBuild Projects="PerfiteLastEventsRT.dproj"/>
+    </Target>
+    <Target Name="PerfiteLastEventsRT:Clean">
+        <MSBuild Projects="PerfiteLastEventsRT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PerfiteLastEventsRT:Make">
+        <MSBuild Projects="PerfiteLastEventsRT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PerfiteLastEventsDT;PerfiteLastEventsRT"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PerfiteLastEventsDT:Clean;PerfiteLastEventsRT:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PerfiteLastEventsDT:Make;PerfiteLastEventsRT:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

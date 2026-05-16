@@ -1,0 +1,12 @@
+package PerfiteLastEventsDT;
+
+requires
+  rtl,
+  vcl,
+  designide,
+  PerfiteLastEventsRT;
+
+contains
+  PerfiteLastEventsTileReg in 'PerfiteLastEventsTileReg.pas';
+
+end.

@@ -1,0 +1,52 @@
+# Delphi / RAD Studio build output
+*.dcu
+*.dcuil
+*.dcp
+*.bpl
+*.bpi
+*.lib
+*.obj
+*.hpp
+*.map
+*.tds
+*.rsm
+*.drc
+*.res
+*.otares
+
+# Delphi local/user files
+*.local
+*.identcache
+*.stat
+*.tvsconfig
+*.dsk
+*.dproj.local
+*.groupproj.local
+*.delphilsp.json
+
+# Delphi history/recovery folders
+__history/
+__recovery/
+
+# IDE/compiler temporary folders
+Win32/
+Win64/
+Debug/
+Release/
+__astcache/
+.vs/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.~*
+*.$$$
+
+# Keep source resources
+!*.rc
+!*.dcr
+!*.bmp
+!*.ico
+!*.png
+!*.svg
